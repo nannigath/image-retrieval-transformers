@@ -1,6 +1,7 @@
 from .cub200 import Cub200Dataset
 from .sop import SOPDataset
 from .inshop import InShopDataset
+from .custom import TuplesDataset
 
 
 def get_dataset(args):
@@ -21,5 +22,10 @@ def get_dataset(args):
         train   = InShopDataset(args.data_path, split="train")
         query   = InShopDataset(args.data_path, split="query")
         gallery = InShopDataset(args.data_path, split="gallery")
+    
+    if args.dataset == 'custom':
+        if args.task == 'purticular':
+            train   = TuplesDataset(args.data_path, split="train")
+            query   = TuplesDataset(args.data_path, split="val")
 
     return train, query, gallery
